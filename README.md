@@ -11,7 +11,7 @@ You need a working environment with:
 * [Git](https://git-scm.com) - You can install it from https://git-scm.com/downloads.
 * [Node](https://nodejs.org) - Install node.js from https://nodejs.org/es/download/. It's advisable to install the LTS version.
 
-## General Installation instructions
+## General instructions to deploy this repo in github pages with your own github account
 
 Clone this project:
 
@@ -32,7 +32,7 @@ Run the project to see the resulting page:
 npm run dev
 ```
 
-Now create a new repository with your own account and upload this project
+Now create a new repository with your own account, copy the url of your repo and start using it
 
 ```
 git remote add my-github-repo https://github.com/your-github-account/your-github-repo
@@ -69,6 +69,8 @@ npm run build
 5. upload only the ```dist``` folder to the ```pages``` branch of your remote repository.
 
 ````
+git add .
+git commit -m "fix repo is now ready to be deployed on my own account"
 git subtree push --prefix dist your-github-repo pages
 ````
 
