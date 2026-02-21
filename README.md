@@ -2,63 +2,83 @@
 
 This project is there as an example on how to upload a dist project to Github pages.
 
-This is the result in https://
+This is the result in [https://tcrurav.github.io/github-pages-react-example/](https://tcrurav.github.io/github-pages-react-example/)
 
-Here are the instructions I have followed: https://gist.github.com/sc1f/12ad9c209a87678b49f4507abf458138
-
-## Getting Started
-
-Read the links in the acknowlegements section bellow to get an idea about Firebase.
-
-The final result looks like this, i.e. a simple CRUD without update.
-
-![Screenshot](/screenshots/screenshot-1.png)
 
 ## Prerequisites
 
 You need a working environment with:
 * [Git](https://git-scm.com) - You can install it from https://git-scm.com/downloads.
-* [Node.js](https://nodejs.org) - Install node.js from https://nodejs.org/es/download/. It's advisable to install the LTS version.
+* [Node](https://nodejs.org) - Install node.js from https://nodejs.org/es/download/. It's advisable to install the LTS version.
 
 ## General Installation instructions
-
-Create a Firebase project and create a Real-time database in that project.
-
-Import some fake data in your database to start up. Here you have some:
-[Some data to import to Firebase](/docs/reactbikes-default-rtdb-export.json)
 
 Clone this project:
 
 ```
-git clone https://github.com/tcrurav/ReactFirebaseSimpleExample.git
+git clone https://github.com/tcrurav/github-pages-react-example.git
 ```
 
 Now install all dependencies.
 
 ```
-cd ReactFirebaseSimpleExample
+cd github-pages-react-example
 npm install
 ```
 
-Modify the constant firebaseConfig in file src/firebase.js so that it contains the corresponding configuration data of your project. Here you have an example:
+Run the project to see the resulting page:
 
 ```
-const firebaseConfig = {
-  apiKey: "AIzaSyBL83k7hQlfWWYFsjV4qIqAwFyTNV3Csds",
-  authDomain: "reactbikes.firebaseapp.com",
-  databaseURL: "https://reactbikes-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "reactbikes",
-  storageBucket: "reactbikes.appspot.com",
-  messagingSenderId: "120470000752",
-  appId: "1:120470000752:web:e3ce490552fcc96fe750b5"
-};
+npm run dev
 ```
 
-And finally run the project.
+Now create a new repository with your own account and upload this project
 
 ```
-cd ReactFirebaseSimpleExample
-npm start
+git remote add my-github-repo https://github.com/your-github-account/your-github-repo
+``` 
+
+Now you are ready to do the really important stuff:
+
+1. Create a new branch called pages
+
+````
+git checkout -b pages
+````
+
+2. edit your ```vite.config.js``` configuration file to have your base directory.
+
+````
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({
+  plugins: [react()],
+  base: '/your-github-repo/', // 👈 your repo name
+})
+````
+
+3. build your react project.
+
+````
+npm run build
+````
+
+4. Edit your ```.gitignore``` file and delete the ```dist``` line to allow ```dist``` folder.
+
+5. upload only the ```dist``` folder to the ```pages``` branch of your remote repository.
+
+````
+git subtree push --prefix dist your-github-repo pages
+````
+
+6. Enable your ```pages``` branch to be deployed on github pages
+
+![screenshot](docs/screenshot-01.png)
+
+7. Now you can access your deployed project:
+```
+https://your-github-account.github.io/your-github-repo
 ```
 
 Enjoy!!!
@@ -67,9 +87,7 @@ Enjoy!!!
 ## Built With
 
 * [Visual Studio Code](https://code.visualstudio.com/) - The Editor used in this project
-* [Node.js](https://nodejs.org/) - Node.js® is a JavaScript runtime built on Chrome's V8 JavaScript engine.
-* [firebase real-time database](https://firebase.google.com/docs/database/web/read-and-write?hl=es-419) - Read and Write data in the web.
-* [Create React App](https://create-react-app.dev/) - Set up a modern web app by running one command
+* [Vite](https://vite.dev/) - The Build Tool for the Web
 
 ## Acknowledgments
 
